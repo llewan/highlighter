@@ -1,0 +1,24 @@
+{
+  "extends": "bragi",
+  "rules": {
+    "import/no-extraneous-dependencies": ["off", { "devDependencies": true }],
+    "no-unused-expressions": "off",
+    "react/sort-comp": "off",
+    "react/forbid-prop-types": "off",
+    "nordic/i18n-jsx-no-literals": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+  },
+  "overrides": [
+    {
+      "files": [ "*Svg.js" ],
+      "rules": {
+        "max-len": 0
+      }
+    }
+  ],
+  "globals": {
+    "document": true,
+    "window": true
+  },
+}
