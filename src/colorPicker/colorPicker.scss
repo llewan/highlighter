@@ -1,0 +1,20 @@
+.colorPicker {
+  &__btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    &--red {
+      background: red;
+    }
+
+    &--yellow {
+      background: yellow;
+    }
+
+    &--green {
+      background: green;
+    }
+  }
+}
