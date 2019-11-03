@@ -4,17 +4,19 @@ import ColorPicker from '../colorPicker/colorPicker';
 
 const Filter = (props) => {
   const { highlights, filterByColor } = props;
-  const chunks = highlights.filter(hl => hl.colorToHighlight === filterByColor);
+  const filteredHighlights = highlights
+    .filter(hl => hl.colorToHighlight === filterByColor)
+    .sort((x, y) => (x.from > y.from) ? 1 : -1);
+
   return (
     <section className="filter">
       <ColorPicker
         onSetColor={props.onSetFilterColor}
       />
-      <div className="filter__words">
-        {chunks.map(chunk => (<span
-          style={{ background: chunk.colorToHighlight }}
-        >{chunk.highlight}</span>))}
-      </div>
+      <ul className="filter__words">
+        {filteredHighlights.map(chunk => (<li className="filter__words__row">
+          <span style={{ background: chunk.colorToHighlight }}>{chunk.highlight}</span></li>))}
+      </ul>
     </section>
   );
 };
