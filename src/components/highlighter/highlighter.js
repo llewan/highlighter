@@ -87,7 +87,7 @@ class Highlighter extends Component {
 
 
 Highlighter.propTypes = {
-  highlights: PropTypes.array.isRequired,
+  textToHighlight: PropTypes.string.isRequired,
 };
 
 export default Highlighter;
