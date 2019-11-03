@@ -18,7 +18,7 @@ const Highlighter = (props) => {
     };
     const formattedText = props.textToHighlight.split('').map(applyHighlight);
     setText(formattedText);
-  }, [state.highlights]);
+  }, [props.textToHighlight, state.highlights]);
 
   const highlightText = (ev) => {
     ev.stopPropagation();

@@ -6,7 +6,7 @@ const Filter = (props) => {
   const { highlights, filterByColor } = props;
   const filteredHighlights = highlights
     .filter(hl => hl.colorToHighlight === filterByColor)
-    .sort((x, y) => (x.from > y.from) ? 1 : -1);
+    .sort((x, y) => ((x.from > y.from) ? 1 : -1));
 
   return (
     <section className="filter">
