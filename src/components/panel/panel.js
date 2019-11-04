@@ -7,14 +7,12 @@ const Panel = (props) => {
   const highlightText = (ev) => {
     ev.stopPropagation();
 
-    const { colorToHighlight, textToHighlight, onHighlight } = props;
-    const highlight = window && window.getSelection().toString();
-    const from = textToHighlight.indexOf(highlight);
-    const to = from + (highlight.length - 1);
-    const isValidHighlight = highlight.length && colorToHighlight;
-    const obj = isValidHighlight ? { highlight, colorToHighlight, from, to } : null;
+    const { colorToHighlight, onHighlight } = props;
+    const highlight = window.getSelection().toString();
+    const from = window.getSelection().getRangeAt(0).startOffset;
+    const to = window.getSelection().getRangeAt(0).endOffset - 1;
 
-    onHighlight(obj);
+    onHighlight({ highlight, colorToHighlight, from, to });
   };
 
   const handleChange = (ev) => {
@@ -25,14 +23,25 @@ const Panel = (props) => {
     props.onSelectTextToHighlight(value);
   };
 
-  const renderTextArea = () => (<Fragment>
-    <textarea className="panel__textArea" placeholder={'Enter a text to highlight'} value={value} onChange={handleChange} />
-    <button className="panel__submit" onClick={handleSubmit}>Submit</button>
-  </Fragment>);
+  const renderEditionMode = () => (
+    <Fragment>
+      <textarea className="panel__textArea" placeholder={'Enter a text to highlight'} value={value} onChange={handleChange} />
+      <button className="panel__submit" onClick={handleSubmit}>Submit</button>
+    </Fragment>
+  );
+
+  const renderHighlightMode = () => (
+    <Fragment>
+      <p className="panel__highlightMode panel__highlightMode--front" onMouseUp={highlightText}>{props.textToHighlight}
+      </p>
+      <p className="panel__highlightMode panel__highlightMode--back">{props.text}
+      </p>
+    </Fragment>
+  );
 
   return (
     <section className="panel">
-      { props.textToHighlight ? <p className="panel__highlightMode"  onMouseUp={highlightText}>{props.text}</p> : renderTextArea() }
+      { props.textToHighlight ? renderHighlightMode() : renderEditionMode() }
     </section>
   );
 };

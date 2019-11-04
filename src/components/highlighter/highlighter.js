@@ -5,11 +5,10 @@ import Filter from '../filter/filter';
 import Highlight from '../highlight/highlight';
 import Panel from '../panel/panel';
 import { reducer, initialState } from '../../business/reducer';
-import { ADD, CLEAR, UNDO, RESET, ADD_TEXT_TO_HIGHLIGHT } from '../../business/actionTypes';
+import { ADD, CLEAR, UNDO, RESET, ADD_TEXT_TO_HIGHLIGHT, ADD_COLOR_TO_FILTER } from '../../business/actionTypes';
 
 const Highlighter = () => {
   const [colorToHighlight, setColorToHighlight] = useState('');
-  const [colorToFilter, setColorToFilter] = useState('');
   const [state, dispatch] = useReducer(reducer, initialState);
   const [text, setText] = useState([]);
 
@@ -23,7 +22,6 @@ const Highlighter = () => {
   }, [state.highlights, state.textToHighlight]);
 
   const addHighlight = (aHighlight) => {
-    if (!aHighlight) return;
     dispatch({ type: ADD, payload: aHighlight });
   };
 
@@ -43,27 +41,36 @@ const Highlighter = () => {
     dispatch({ type: ADD_TEXT_TO_HIGHLIGHT, payload: aTextToHighlight });
   };
 
+  const setFilterColor = (aColor) => {
+    dispatch({ type: ADD_COLOR_TO_FILTER, payload: aColor });
+  };
+
   return (
     <section className="highlighter">
-      <ColorPicker onSetColor={setColorToHighlight} />
+      <div className="highlighter__text">
+        <ColorPicker onSetColor={setColorToHighlight} />
 
-      <button className="highlighter__action" onClick={undo}>Undo</button>
-      <button className="highlighter__action" onClick={clear}>Clear</button>
-      <button className="highlighter__action" onClick={reset}>Reset</button>
+        <button className="highlighter__action" onClick={undo}>Undo</button>
+        <button className="highlighter__action" onClick={clear}>Clear</button>
+        <button className="highlighter__action" onClick={reset}>Reset</button>
 
-      <Panel
-        onHighlight={addHighlight}
-        onSelectTextToHighlight={selectText}
-        colorToHighlight={colorToHighlight}
-        text={text}
-        textToHighlight={state.textToHighlight}
-      />
+        <Panel
+          onHighlight={addHighlight}
+          onSelectTextToHighlight={selectText}
+          colorToHighlight={colorToHighlight}
+          text={text}
+          textToHighlight={state.textToHighlight}
+        />
+      </div>
 
-      <Filter
-        highlights={state.highlights}
-        filterByColor={colorToFilter}
-        onSetFilterColor={setColorToFilter}
-      />
+      <div className="highlighter__filter">
+        <Filter
+          highlights={state.highlights}
+          filterByColor={state.colorToFilter}
+          onSetFilterColor={setFilterColor}
+        />
+      </div>
+
     </section>
   );
 };

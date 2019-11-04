@@ -1,21 +1,38 @@
 .panel {
   margin: 10px 0;
-
   display: flex;
   justify-content: left;
   align-items: center;
+  position: relative;
 
   &__highlightMode,
   &__textArea {
-    width: 400px;
-    min-height: 150px;
     box-sizing: border-box;
     padding: 10px;
     margin: 0;
   }
 
+  &__highlightMode {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &--front {
+      z-index: 1;
+      background: transparent;
+    }
+    &--back {
+      z-index: 0;
+      color: transparent;
+    }
+  }
+
+
   &__textArea {
     font-size: 14px;
+    width: 100%;
+    min-height: 150px;
+    border: 1px solid black;
   }
 
   &__submit {

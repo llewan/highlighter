@@ -3,6 +3,16 @@
 @import "../panel/panel";
 
 .highlighter {
+  display: flex;
+
+  &__text {
+    flex: 1;
+  }
+
+  &__filter {
+    flex: 1;
+  }
+
   &__action {
     margin: 10px 10px 0 0;
     border: none;
