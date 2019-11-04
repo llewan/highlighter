@@ -1,0 +1,32 @@
+.panel {
+  margin: 10px 0;
+
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  &__highlightMode,
+  &__textArea {
+    width: 400px;
+    min-height: 150px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0;
+  }
+
+  &__textArea {
+    font-size: 14px;
+  }
+
+  &__submit {
+    margin: 0 10px;
+    border: none;
+    background: #404040;
+    color: #ffffff !important;
+    font-weight: 100;
+    padding: 8px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display: inline-block;
+  }
+}

@@ -1,6 +1,6 @@
-import { ADD, CLEAR, UNDO } from './actionTypes';
+import { ADD, CLEAR, UNDO, RESET, ADD_TEXT_TO_HIGHLIGHT } from './actionTypes';
 
-const initialState = { highlights: [] };
+const initialState = { highlights: [], textToHighlight: '' };
 
 function reducer(state, action) {
   switch (action.type) {
@@ -10,6 +10,10 @@ function reducer(state, action) {
       return { ...state, highlights: [...state.highlights.slice(0, state.highlights.length - 1)] };
     case CLEAR:
       return { ...state, highlights: [] };
+    case RESET:
+      return initialState;
+    case ADD_TEXT_TO_HIGHLIGHT:
+      return { ...state, textToHighlight: action.payload };
     default:
       return initialState;
   }

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
+import Highlight from '../highlight/highlight';
 import ColorPicker from '../colorPicker/colorPicker';
 
 const Filter = (props) => {
@@ -14,8 +16,10 @@ const Filter = (props) => {
         onSetColor={props.onSetFilterColor}
       />
       <ul className="filter__words">
-        {filteredHighlights.map(chunk => (<li className="filter__words__row">
-          <span style={{ background: chunk.colorToHighlight }}>{chunk.highlight}</span></li>))}
+        {filteredHighlights.map(line => (
+          <li key={shortid.generate()} className="filter__words__row">
+            <Highlight color={line.colorToHighlight} text={line.highlight} />
+          </li>))}
       </ul>
     </section>
   );

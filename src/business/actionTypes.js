@@ -1,5 +1,7 @@
 const ADD = 'ADD';
 const CLEAR = 'CLEAR';
 const UNDO = 'UNDO';
+const ADD_TEXT_TO_HIGHLIGHT = 'ADD_TEXT_TO_HIGHLIGHT';
+const RESET = 'RESET';
 
-export { ADD, CLEAR, UNDO };
+export { ADD, CLEAR, UNDO, ADD_TEXT_TO_HIGHLIGHT, RESET };
